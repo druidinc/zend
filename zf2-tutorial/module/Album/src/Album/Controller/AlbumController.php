@@ -5,7 +5,8 @@ namespace Album\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-use Album\Model\Album;          // <-- Add this import
+use Album\Model\Album;
+use Album\Model\AlbumSecond;          // <-- Add this import
 use Album\Form\AlbumForm;
 
 class AlbumController extends AbstractActionController
@@ -14,8 +15,10 @@ class AlbumController extends AbstractActionController
 
     public function indexAction()
     {
+        $sm = $this->getServiceLocator();
+        $albumModel = $sm->get('Album\Model\AlbumSecond');
         return new ViewModel(array(
-            'albums' => $this->getAlbumTable()->fetchAll(),
+            'albums' => $albumModel->fetchAll(),
         ));
     }
 

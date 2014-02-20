@@ -4,6 +4,7 @@ namespace Album;
 
 use Album\Model\Album;
 use Album\Model\AlbumTable;
+use Album\Model\AlbumSecond;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -42,6 +43,11 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Album());
                     return new TableGateway('album', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Album\Model\AlbumSecond' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new AlbumSecond($dbAdapter);
+                    return $table;
                 },
             ),
         );
